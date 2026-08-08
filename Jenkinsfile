@@ -2,6 +2,7 @@ pipeline {
     agent any
 
     stages {
+
         stage('Checkout') {
             steps {
                 checkout scm
@@ -17,6 +18,12 @@ pipeline {
         stage('Test') {
             steps {
                 echo 'Testing HTML project...'
+            }
+        }
+
+        stage('Package') {
+            steps {
+                sh 'docker build -t devops-html:${BUILD_NUMBER} .'
             }
         }
     }
